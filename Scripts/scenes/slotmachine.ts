@@ -25,6 +25,9 @@ module scenes {
         private _bells = 0;
         private _sevens = 0;
         private _blanks = 0;
+
+
+
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
             super();
@@ -294,10 +297,12 @@ module scenes {
                 var bitmap: string[] = this._spinReels();
 
                 for (var reel: number = 0; reel < 3; reel++) {
-                    this._reels[reel].image = assets.getResult(bitmap[reel]);
+                    this._reels[reel].image = assets.getResult(bitmap[reel]);                
+                    console.log("reel" + reel + " " + this._reels[reel]);
                 }
                 
                 this._determineWinnings();
+                
                 
                 // reset player's bet to zero
                 this.playerBet = 0;
