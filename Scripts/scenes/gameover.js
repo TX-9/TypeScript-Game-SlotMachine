@@ -25,7 +25,7 @@ var scenes;
         // Start Method
         GameOver.prototype.start = function () {
             // add the WELCOME Label to the MENU scene
-            this._gameOverLabel = new objects.Label("Play again or Finish?", "40px Consolas", "#000000", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
+            this._gameOverLabel = new objects.Label("Play again or Quit?", "40px Consolas", "#000000", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
             this.addChild(this._gameOverLabel);
 
             // add the START button to the MENU scene

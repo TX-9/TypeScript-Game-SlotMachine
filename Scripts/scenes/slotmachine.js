@@ -239,8 +239,10 @@ var scenes;
 
         //assign bet money and show the amount
         SlotMachine.prototype._placeBet = function (playerBet) {
-            // ensure player's bet is less than or equal to players money
-            if (playerBet <= this.playerMoney) {
+            // Check player has as enough money as it is more than bet money
+            if (playerBet > this.playerMoney) {
+                alert("Sorry, not enough money");
+            } else {
                 this.playerBet += playerBet;
                 this.playerMoney -= playerBet;
                 this._creditsText.text = this.playerMoney.toString();
@@ -272,12 +274,6 @@ var scenes;
             // Check player bet his money
             if (this.playerBet <= 0) {
                 alert("Please Bet!");
-                // Check player has as enough money as it is more than bet money
-            } else if (this.playerBet > this.playerMoney) {
-                // reset player's bet to zero
-                this.playerBet = 0;
-                this._betText.text = this.playerBet.toString();
-                alert("Sorry, not enough money");
             } else {
                 var bitmap = this._spinReels();
                 for (var reel = 0; reel < 3; reel++) {
