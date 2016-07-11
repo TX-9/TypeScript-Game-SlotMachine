@@ -27,7 +27,7 @@ module scenes {
             // add the WELCOME Label to the MENU scene
             this._gameOverLabel = new objects.Label(
                 "Play again or Finish?", 
-                "60px Consolas", 
+                "40px Consolas", 
                 "#000000", 
                 config.Screen.CENTER_X, 
                 config.Screen.CENTER_Y, true);
