@@ -26,14 +26,12 @@ var scenes;
         Menu.prototype.start = function () {
             // add background image to the scene
             this._logoImage = new createjs.Bitmap(assets.getResult("SlotMachineLogo"));
+            this._logoImage.x = config.Screen.CENTER_X - 120;
+            this._logoImage.y = config.Screen.CENTER_Y - 100;
             this.addChild(this._logoImage);
 
-            // add the WELCOME Label to the MENU scene
-            this._welcomeLabel = new objects.Label("SLOT MACHINE", "60px Consolas", "#000000", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
-            this.addChild(this._welcomeLabel);
-
             // add the START button to the MENU scene
-            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 80, true);
+            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 170, true);
             this.addChild(this._startButton);
 
             // START Button event listener
