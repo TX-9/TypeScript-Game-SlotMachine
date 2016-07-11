@@ -3,9 +3,11 @@ module scenes {
     export class SlotMachine extends objects.Scene {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _backgroundImage: createjs.Bitmap;
-        private _bet1Button: objects.Button;
         private _bet10Button: objects.Button;
+        private _bet50Button: objects.Button;
         private _bet100Button: objects.Button;
+        private _resetButton: objects.Button;
+        private _gameoverButton: objects.Button;
         private _spinButton: objects.Button;
         private _reels: createjs.Bitmap[];
         private _jackpotText: objects.Label;
@@ -44,59 +46,71 @@ module scenes {
             this._backgroundImage = new createjs.Bitmap(assets.getResult("SlotMachine"));
             this.addChild(this._backgroundImage);
             
-            // add Bet1Button to the scene
-            this._bet1Button = new objects.Button("Bet1Button", 168, 382, false);
-            this.addChild(this._bet1Button);
-            this._bet1Button.on("click", this._bet1ButtonClick, this); 
-            
             // add Bet10Button to the scene
-            this._bet10Button = new objects.Button("Bet10Button", 240, 382, false);
+            this._bet10Button = new objects.Button("Bet10Button", 148, 480, false);
             this.addChild(this._bet10Button);
             this._bet10Button.on("click", this._bet10ButtonClick, this); 
             
+            // add Bet50Button to the scene
+            this._bet50Button = new objects.Button("Bet50Button", 213, 480, false);
+            this.addChild(this._bet50Button);
+            this._bet50Button.on("click", this._bet50ButtonClick, this); 
+            
             // add Bet100Button to the scene
-            this._bet100Button = new objects.Button("Bet100Button", 312, 382, false);
+            this._bet100Button = new objects.Button("Bet100Button", 281, 480, false);
             this.addChild(this._bet100Button);
             this._bet100Button.on("click", this._bet100ButtonClick, this); 
             
+             // add ResetButton to the scene
+            this._resetButton = new objects.Button("ResetButton", 346, 480, false);
+            this.addChild(this._resetButton);
+            this._resetButton.on("click", this._resetButtonClick, this); 
+
+            // add QuitButton to the scene
+            this._gameoverButton = new objects.Button("GameoverButton", 414, 480, false);
+            this.addChild(this._gameoverButton);
+            this._gameoverButton.on("click", this._gameoverButtonClick, this); 
+
             // add SpinButton to the scene
-            this._spinButton = new objects.Button("SpinButton", 402, 382, false);
+            this._spinButton = new objects.Button("SpinButton", 521, 80, false);
             this.addChild(this._spinButton);
             this._spinButton.on("click", this._spinButtonClick, this); 
         
+            
+
             // add JackPot Text to the scene
             this._jackpotText = new objects.Label(
                 this.jackpot.toString(),
-                "14px Consolas",
-                "#ff0000",
-                353, 107, false);
+                "36px Consolas",
+                "#FFFF00",
+                350, 40, false);
             this._jackpotText.textAlign = "right";
             this.addChild(this._jackpotText);
         
             // add Credits Text to the scene
             this._creditsText = new objects.Label(
                 this.playerMoney.toString(),
-                "14px Consolas",
-                "#ff0000",
-                254, 303, false);
+                "23px Consolas",
+                "#FFFF00",
+                255, 386, false);
             this._creditsText.textAlign = "right";
             this.addChild(this._creditsText);
             
             // add Bet Text to the scene
             this._betText = new objects.Label(
                 this.playerBet.toString(),
-                "14px Consolas",
-                "#ff0000",
-                351, 303, false);
+                "23px Consolas",
+                "#FFFF00",
+                345, 386, false);
             this._betText.textAlign = "right";
             this.addChild(this._betText);
             
             // add Result Text to the scene
             this._resultText = new objects.Label(
                 this.winnings.toString(),
-                "14px Consolas",
-                "#ff0000",
-                450, 303, false);
+                "23px Consolas",
+                "#FFFF00",
+                437, 386, false);
             this._resultText.textAlign = "right";
             this.addChild(this._resultText);
         
@@ -257,8 +271,8 @@ module scenes {
             this._reels = new Array<createjs.Bitmap>();
             for (var reel: number = 0; reel < 3; reel++) {
                 this._reels[reel] = new createjs.Bitmap(assets.getResult("Banana"));
-                this._reels[reel].x = 216 + (reel * 84);
-                this._reels[reel].y = 220;
+                this._reels[reel].x = 178 + (reel * 100);
+                this._reels[reel].y = 245;
                 this.addChild(this._reels[reel]);
                 console.log("reel" + reel + " " + this._reels[reel]);
             }
@@ -276,14 +290,15 @@ module scenes {
         
         //EVENT HANDLERS ++++++++++++++++++++
         
-        private _bet1ButtonClick(event: createjs.MouseEvent): void {
-            console.log("Bet 1 Credit");
-            this._placeBet(1);
-        }
-
+       
         private _bet10ButtonClick(event: createjs.MouseEvent): void {
             console.log("Bet 10 Credit");
             this._placeBet(10);
+        }
+
+        private _bet50ButtonClick(event: createjs.MouseEvent): void {
+            console.log("Bet 50 Credit");
+            this._placeBet(50);
         }
 
         private _bet100ButtonClick(event: createjs.MouseEvent): void {
@@ -309,6 +324,22 @@ module scenes {
                 this._betText.text = this.playerBet.toString();
             }
 
+        }
+        private _resetButtonClick(event: createjs.MouseEvent): void {
+            console.log("_resetButtonClick");
+            this.start();
+           
+        }
+        private _gameoverButtonClick(event: createjs.MouseEvent): void {
+            console.log("_quitButtonClick");
+           
+             //FadeOut 
+            this._fadeOut(500, () => {
+                // Switch to the Game over Scene
+                scene = config.Scene.GAME_OVER;
+                changeScene();
+            });
+            
         }
     }
 }

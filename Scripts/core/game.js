@@ -19,10 +19,13 @@ var assetData = [
     { id: "StartButton", src: "../../Assets/images/StartButton.png" },
     { id: "StartOverButton", src: "../../Assets/images/StartOverButton.png" },
     { id: "SlotMachine", src: "../../Assets/images/SlotMachine.png" },
-    { id: "Bet1Button", src: "../../Assets/images/Bet1Button.png" },
     { id: "Bet10Button", src: "../../Assets/images/Bet10Button.png" },
+    { id: "Bet50Button", src: "../../Assets/images/Bet50Button.png" },
     { id: "Bet100Button", src: "../../Assets/images/Bet100Button.png" },
     { id: "SpinButton", src: "../../Assets/images/SpinButton.png" },
+    { id: "ResetButton", src: "../../Assets/images/ResetButton.png" },
+    { id: "GameoverButton", src: "../../Assets/images/GameoverButton.png" },
+    { id: "QuitButton", src: "../../Assets/images/QuitButton.png" },
     { id: "BlackBackground", src: "../../Assets/images/BlackBackground.png" },
     { id: "WhiteBackground", src: "../../Assets/images/WhiteBackground.png" },
     { id: "Blank", src: "../../Assets/images/Blank.png" },
@@ -32,7 +35,8 @@ var assetData = [
     { id: "Orange", src: "../../Assets/images/Orange.gif" },
     { id: "Bar", src: "../../Assets/images/Bar.gif" },
     { id: "Bell", src: "../../Assets/images/Bell.gif" },
-    { id: "Seven", src: "../../Assets/images/Seven.gif" }
+    { id: "Seven", src: "../../Assets/images/Seven.gif" },
+    { id: "SlotMachineLogo", src: "../../Assets/images/SlotMachineLogo.png" }
 ];
 
 function preload() {

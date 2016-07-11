@@ -4,7 +4,8 @@ module scenes {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _startOverButton:objects.Button;
         private _gameOverLabel:objects.Label;
-        
+        private _quitButton: objects.Button;
+
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
             super();
@@ -27,14 +28,23 @@ module scenes {
             // add the START button to the MENU scene
             this._startOverButton = new objects.Button(
                 "StartButton",
-                config.Screen.CENTER_X,
+                config.Screen.CENTER_X - 20,
                 config.Screen.CENTER_Y + 80, true);
             this.addChild(this._startOverButton);
             
+             // add the QUIT button to finish
+            this._quitButton = new objects.Button(
+                "QuitButton",
+                config.Screen.CENTER_X + 20,
+                config.Screen.CENTER_Y + 80, true);
+            this.addChild(this._quitButton);
+
             // START Button event listener
             this._startOverButton.on("click", this._startOverButtonClick, this);
            
-            
+             // QUIT Button event listener
+            this._quitButton.on("click", this._quitOverButtonClick, this);
+
             // add this scene to the global stage container
             stage.addChild(this);
         }
@@ -52,6 +62,14 @@ module scenes {
             // Switch to the LEFT_CAVE Scene
             scene = config.Scene.SLOT_MACHINE;
             changeScene();
+        }
+
+         // QUIT Button click event handler
+        private _quitOverButtonClick(event: createjs.MouseEvent) {
+            // Finish Game
+            if (confirm("Quit Game?")) {
+                window.close();
+            }
         }
         
     }

@@ -4,7 +4,7 @@ module scenes {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
         private _startButton: objects.Button;
         private _welcomeLabel: objects.Label;
-        
+        private _logoImage: createjs.Bitmap;
         // CONSTRUCTOR ++++++++++++++++++++++
         constructor() {
             super();
@@ -15,7 +15,10 @@ module scenes {
         // Start Method
         public start(): void {    
 
-            
+            // add background image to the scene
+            this._logoImage = new createjs.Bitmap(assets.getResult("SlotMachineLogo"));
+            this.addChild(this._logoImage);
+
             // add the WELCOME Label to the MENU scene
             this._welcomeLabel = new objects.Label(
                 "SLOT MACHINE",
@@ -57,7 +60,7 @@ module scenes {
         private _startButtonClick(event: createjs.MouseEvent) {
             //FadeOut 
             this._fadeOut(500, () => {
-                // Switch to the LEFT_CAVE Scene
+                // Switch to the SLOT_MACHINE Scene
                 scene = config.Scene.SLOT_MACHINE;
                 changeScene();
             });
