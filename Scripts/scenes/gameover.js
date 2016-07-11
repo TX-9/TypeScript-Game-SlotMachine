@@ -62,7 +62,10 @@ var scenes;
         GameOver.prototype._quitOverButtonClick = function (event) {
             // Finish Game
             if (confirm("Do you want to quit game?")) {
-                window.close();
+                var objWindow = window.open(location.href, "_self");
+                objWindow.close();
+                //  window.opener = window;
+                // window.close();
             }
         };
         return GameOver;
