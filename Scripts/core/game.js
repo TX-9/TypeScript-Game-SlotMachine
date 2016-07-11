@@ -1,4 +1,12 @@
-﻿/// <reference path = "_reference.ts" />
+﻿/*
+Author: Changbae Lee(300770812)
+Service URL: http://changbaelee-slotmachine.azurewebsites.net/
+Description: Web App called Slot machine is developed with CreateJS framework
+Revision History: It is managed with GitHub (https://github.com/TX-9/COMP397-S2016-SlotMachine)
+Last Modified by: Changbae Lee
+Last Modified date: Jul 11, 2016
+*/
+//Includes resources shared with other components
 // global variables
 var assets;
 var canvas;
@@ -13,6 +21,7 @@ var menu;
 var slotMachine;
 var gameOver;
 
+//manages image files to be used
 var assetData = [
     { id: "BackButton", src: "../../Assets/images/BackButton.png" },
     { id: "Nextbutton", src: "../../Assets/images/Nextbutton.png" },
@@ -39,6 +48,7 @@ var assetData = [
     { id: "SlotMachineLogo", src: "../../Assets/images/SlotMachineLogo.png" }
 ];
 
+//load resources
 function preload() {
     assets = new createjs.LoadQueue();
     assets.installPlugin(createjs.Sound);
@@ -46,6 +56,7 @@ function preload() {
     assets.loadManifest(assetData);
 }
 
+//initialize App
 function init() {
     // create a reference the HTML canvas Element
     canvas = document.getElementById("canvas");
@@ -124,4 +135,5 @@ function changeScene() {
     console.log(currentScene.numChildren);
 }
 
+//when html page loads, preload calls
 window.onload = preload;

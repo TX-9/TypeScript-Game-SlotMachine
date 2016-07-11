@@ -1,8 +1,17 @@
-var __extends = (this && this.__extends) || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    __.prototype = b.prototype;
+    d.prototype = new __();
 };
+/*
+Author: Changbae Lee(300770812)
+Service URL: http://changbaelee-slotmachine.azurewebsites.net/
+Description: Web App called Slot machine is developed with CreateJS framework
+Revision History: It is managed with GitHub (https://github.com/TX-9/COMP397-S2016-SlotMachine)
+Last Modified by: Changbae Lee
+Last Modified date: Jul 11, 2016
+*/
 var objects;
 (function (objects) {
     var Button = (function (_super) {
@@ -13,12 +22,15 @@ var objects;
             this.isCentered = isCentered;
             this.x = x;
             this.y = y;
+
             this.width = 150;
             this.height = 50;
+
             if (this.isCentered) {
                 this.regX = this.width * 0.5;
                 this.regY = this.height * 0.5;
             }
+
             this.on("mouseover", this.overButton, this);
             this.on("mouseout", this.outButton, this);
         }
@@ -27,12 +39,12 @@ var objects;
         Button.prototype.overButton = function (event) {
             event.currentTarget.alpha = 0.7;
         };
+
         // Event Handler for mouse out
         Button.prototype.outButton = function (event) {
             event.currentTarget.alpha = 1.0;
         };
         return Button;
-    }(createjs.Bitmap));
+    })(createjs.Bitmap);
     objects.Button = Button;
 })(objects || (objects = {}));
-//# sourceMappingURL=button.js.map

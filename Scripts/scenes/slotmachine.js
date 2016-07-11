@@ -4,7 +4,15 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-// MENU SCENE
+/*
+Author: Changbae Lee(300770812)
+Service URL: http://changbaelee-slotmachine.azurewebsites.net/
+Description: Web App called Slot machine is developed with CreateJS framework
+Revision History: It is managed with GitHub (https://github.com/TX-9/COMP397-S2016-SlotMachine)
+Last Modified by: Changbae Lee
+Last Modified date: Jul 11, 2016
+*/
+// SLOT_MACHINE SCENE - the slotmachine scene
 var scenes;
 (function (scenes) {
     var SlotMachine = (function (_super) {
@@ -104,10 +112,11 @@ var scenes;
             return (value >= lowerBounds && value <= upperBounds) ? value : -1;
         };
 
+        //Reset variables to start gain
         SlotMachine.prototype._resetAll = function () {
-            this.playerMoney = 1000;
+            this.playerMoney = 500;
             this.winnings = 0;
-            this.jackpot = 5000;
+            this.jackpot = 3000;
             this.playerBet = 0;
         };
 
@@ -204,6 +213,7 @@ var scenes;
             this._resetFruitTally();
         };
 
+        //Reset fruit counters to start again
         SlotMachine.prototype._resetFruitTally = function () {
             this._grapes = 0;
             this._bananas = 0;
@@ -215,6 +225,7 @@ var scenes;
             this._blanks = 0;
         };
 
+        //initialize first images
         SlotMachine.prototype._initializeBitmapArray = function () {
             this._reels = new Array();
             for (var reel = 0; reel < 3; reel++) {
@@ -226,6 +237,7 @@ var scenes;
             }
         };
 
+        //assign bet money and show the amount
         SlotMachine.prototype._placeBet = function (playerBet) {
             // ensure player's bet is less than or equal to players money
             if (playerBet <= this.playerMoney) {
@@ -237,31 +249,44 @@ var scenes;
         };
 
         //EVENT HANDLERS ++++++++++++++++++++
+        //Bet button click event
         SlotMachine.prototype._bet10ButtonClick = function (event) {
             console.log("Bet 10 Credit");
             this._placeBet(10);
         };
 
+        //Bet button click event
         SlotMachine.prototype._bet50ButtonClick = function (event) {
             console.log("Bet 50 Credit");
             this._placeBet(50);
         };
 
+        //Bet button click event
         SlotMachine.prototype._bet100ButtonClick = function (event) {
             console.log("Bet 100 Credit");
             this._placeBet(100);
         };
 
+        //Spring button click event
         SlotMachine.prototype._spinButtonClick = function (event) {
-            // ensure player has enough money to play
-            if (this.playerBet > 0) {
+            // Check player bet his money
+            if (this.playerBet <= 0) {
+                alert("Please Bet!");
+                // Check player has as enough money as it is more than bet money
+            } else if (this.playerBet > this.playerMoney) {
+                // reset player's bet to zero
+                this.playerBet = 0;
+                this._betText.text = this.playerBet.toString();
+                alert("Sorry, not enough money");
+            } else {
                 var bitmap = this._spinReels();
-
                 for (var reel = 0; reel < 3; reel++) {
+                    //Show images
                     this._reels[reel].image = assets.getResult(bitmap[reel]);
                     console.log("reel" + reel + " " + this._reels[reel]);
                 }
 
+                //Determine the result
                 this._determineWinnings();
 
                 // reset player's bet to zero
@@ -269,10 +294,14 @@ var scenes;
                 this._betText.text = this.playerBet.toString();
             }
         };
+
+        //Reset game variables
         SlotMachine.prototype._resetButtonClick = function (event) {
             console.log("_resetButtonClick");
             this.start();
         };
+
+        //Move to a gameover page
         SlotMachine.prototype._gameoverButtonClick = function (event) {
             console.log("_quitButtonClick");
 

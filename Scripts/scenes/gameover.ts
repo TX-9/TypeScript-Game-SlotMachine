@@ -1,4 +1,12 @@
-// GAME_OVER SCENE
+/* 
+Author: Changbae Lee(300770812)
+Service URL: http://changbaelee-slotmachine.azurewebsites.net/
+Description: Web App called Slot machine is developed with CreateJS framework
+Revision History: It is managed with GitHub (https://github.com/TX-9/COMP397-S2016-SlotMachine)
+Last Modified by: Changbae Lee
+Last Modified date: Jul 11, 2016
+*/
+// GAME_OVER SCENE - the last scene
 module scenes {
     export class GameOver extends objects.Scene {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
@@ -18,7 +26,7 @@ module scenes {
             
             // add the WELCOME Label to the MENU scene
             this._gameOverLabel = new objects.Label(
-                "GAME OVER", 
+                "Play again or Finish?", 
                 "60px Consolas", 
                 "#000000", 
                 config.Screen.CENTER_X, 
@@ -28,14 +36,14 @@ module scenes {
             // add the START button to the MENU scene
             this._startOverButton = new objects.Button(
                 "StartButton",
-                config.Screen.CENTER_X - 20,
+                config.Screen.CENTER_X - 100,
                 config.Screen.CENTER_Y + 80, true);
             this.addChild(this._startOverButton);
             
              // add the QUIT button to finish
             this._quitButton = new objects.Button(
                 "QuitButton",
-                config.Screen.CENTER_X + 20,
+                config.Screen.CENTER_X + 100,
                 config.Screen.CENTER_Y + 80, true);
             this.addChild(this._quitButton);
 
@@ -49,7 +57,7 @@ module scenes {
             stage.addChild(this);
         }
 
-        // INTRO Scene updates here
+        // GAME_OVER Scene updates here
         public update(): void {
 
         }
@@ -67,7 +75,7 @@ module scenes {
          // QUIT Button click event handler
         private _quitOverButtonClick(event: createjs.MouseEvent) {
             // Finish Game
-            if (confirm("Quit Game?")) {
+            if (confirm("Do you want to quit game?")) {
                 window.close();
             }
         }

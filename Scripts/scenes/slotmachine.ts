@@ -1,4 +1,12 @@
-// MENU SCENE
+/* 
+Author: Changbae Lee(300770812)
+Service URL: http://changbaelee-slotmachine.azurewebsites.net/
+Description: Web App called Slot machine is developed with CreateJS framework
+Revision History: It is managed with GitHub (https://github.com/TX-9/COMP397-S2016-SlotMachine)
+Last Modified by: Changbae Lee
+Last Modified date: Jul 11, 2016
+*/
+// SLOT_MACHINE SCENE - the slotmachine scene
 module scenes {
     export class SlotMachine extends objects.Scene {
         //PRIVATE INSTANCE VARIABLES ++++++++++++
@@ -75,8 +83,7 @@ module scenes {
             this._spinButton = new objects.Button("SpinButton", 521, 80, false);
             this.addChild(this._spinButton);
             this._spinButton.on("click", this._spinButtonClick, this); 
-        
-            
+               
 
             // add JackPot Text to the scene
             this._jackpotText = new objects.Label(
@@ -138,10 +145,11 @@ module scenes {
             return (value >= lowerBounds && value <= upperBounds) ? value : -1;
         }
 
+        //Reset variables to start gain 
         private _resetAll() {
-            this.playerMoney = 1000;
+            this.playerMoney = 500;
             this.winnings = 0;
-            this.jackpot = 5000;
+            this.jackpot = 3000;
             this.playerBet = 0;
         }
         
@@ -255,6 +263,7 @@ module scenes {
 
         }
 
+        //Reset fruit counters to start again
         private _resetFruitTally(): void {
             this._grapes = 0;
             this._bananas = 0;
@@ -266,7 +275,7 @@ module scenes {
             this._blanks = 0;
         }
 
-
+        //initialize first images
         private _initializeBitmapArray(): void {
             this._reels = new Array<createjs.Bitmap>();
             for (var reel: number = 0; reel < 3; reel++) {
@@ -278,6 +287,7 @@ module scenes {
             }
         }
 
+        //assign bet money and show the amount
         private _placeBet(playerBet: number) {
             // ensure player's bet is less than or equal to players money
             if (playerBet <= this.playerMoney) {
@@ -290,49 +300,66 @@ module scenes {
         
         //EVENT HANDLERS ++++++++++++++++++++
         
-       
+        //Bet button click event
         private _bet10ButtonClick(event: createjs.MouseEvent): void {
             console.log("Bet 10 Credit");
             this._placeBet(10);
         }
 
+        //Bet button click event
         private _bet50ButtonClick(event: createjs.MouseEvent): void {
             console.log("Bet 50 Credit");
             this._placeBet(50);
         }
 
+        //Bet button click event
         private _bet100ButtonClick(event: createjs.MouseEvent): void {
             console.log("Bet 100 Credit");
             this._placeBet(100);
         }
 
+        //Spring button click event
         private _spinButtonClick(event: createjs.MouseEvent): void {
-            // ensure player has enough money to play
-            if (this.playerBet > 0) {
-                var bitmap: string[] = this._spinReels();
 
+             // Check player bet his money
+             if (this.playerBet <= 0){
+                 alert("Please Bet!");
+
+            // Check player has as enough money as it is more than bet money 
+             }else if(this.playerBet > this.playerMoney){
+                 // reset player's bet to zero
+                this.playerBet = 0;
+                this._betText.text = this.playerBet.toString();
+                alert("Sorry, not enough money");
+             }else{
+               
+                var bitmap: string[] = this._spinReels();
                 for (var reel: number = 0; reel < 3; reel++) {
+                    //Show images
                     this._reels[reel].image = assets.getResult(bitmap[reel]);                
                     console.log("reel" + reel + " " + this._reels[reel]);
                 }
                 
-                this._determineWinnings();
-                
+                //Determine the result
+                this._determineWinnings();         
                 
                 // reset player's bet to zero
                 this.playerBet = 0;
                 this._betText.text = this.playerBet.toString();
-            }
+             }
 
         }
+
+        //Reset game variables
         private _resetButtonClick(event: createjs.MouseEvent): void {
             console.log("_resetButtonClick");
             this.start();
            
         }
+
+        //Move to a gameover page
         private _gameoverButtonClick(event: createjs.MouseEvent): void {
-            console.log("_quitButtonClick");
-           
+            console.log("_quitButtonClick");     
              //FadeOut 
             this._fadeOut(500, () => {
                 // Switch to the Game over Scene

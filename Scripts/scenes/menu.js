@@ -4,7 +4,15 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-// MENU SCENE
+/*
+Author: Changbae Lee(300770812)
+Service URL: http://changbaelee-slotmachine.azurewebsites.net/
+Description: Web App called Slot machine is developed with CreateJS framework
+Revision History: It is managed with GitHub (https://github.com/TX-9/COMP397-S2016-SlotMachine)
+Last Modified by: Changbae Lee
+Last Modified date: Jul 11, 2016
+*/
+// MENU SCENE - the first scene
 var scenes;
 (function (scenes) {
     var Menu = (function (_super) {
@@ -16,18 +24,16 @@ var scenes;
         // PUBLIC METHODS +++++++++++++++++++++
         // Start Method
         Menu.prototype.start = function () {
-             // add background image to the scene
+            // add background image to the scene
             this._logoImage = new createjs.Bitmap(assets.getResult("SlotMachineLogo"));
-            this._logoImage.x = config.Screen.CENTER_X - 110;
-            this._logoImage.y = config.Screen.CENTER_Y - 80;
             this.addChild(this._logoImage);
 
             // add the WELCOME Label to the MENU scene
-           // this._welcomeLabel = new objects.Label("SLOT MACHINE", "60px Consolas", "#000000", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
-//            this.addChild(this._welcomeLabel);
+            this._welcomeLabel = new objects.Label("SLOT MACHINE", "60px Consolas", "#000000", config.Screen.CENTER_X, config.Screen.CENTER_Y, true);
+            this.addChild(this._welcomeLabel);
 
             // add the START button to the MENU scene
-            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 180, true);
+            this._startButton = new objects.Button("StartButton", config.Screen.CENTER_X, config.Screen.CENTER_Y + 80, true);
             this.addChild(this._startButton);
 
             // START Button event listener

@@ -1,7 +1,8 @@
-var __extends = (this && this.__extends) || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    __.prototype = b.prototype;
+    d.prototype = new __();
 };
 var objects;
 (function (objects) {
@@ -11,15 +12,16 @@ var objects;
         // CONSTRUCTOR METHOD +++++++++++++++++++++++++++++++++++
         function Label(labelString, labelFont, labelColour, x, y, isCentered) {
             _super.call(this, labelString, labelFont, labelColour);
+
             if (isCentered) {
                 this.regX = this.getBounds().width * 0.5;
                 this.regY = this.getBounds().height * 0.5;
             }
+
             this.x = x;
             this.y = y;
         }
         return Label;
-    }(createjs.Text));
+    })(createjs.Text);
     objects.Label = Label;
 })(objects || (objects = {}));
-//# sourceMappingURL=label.js.map
